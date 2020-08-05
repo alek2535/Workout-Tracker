@@ -4,7 +4,7 @@ const db = require("../models");
 
 router.get("/api/workouts", (req, res) => {
     db.Workout.find({})
-    .sort({ day: -1 })
+    .sort({ day: 1 })
     .then(dbWorkout => {
       res.json(dbWorkout);
     })
@@ -15,7 +15,7 @@ router.get("/api/workouts", (req, res) => {
 
 router.get("/api/workouts/range", (req, res) => {
     db.Workout.find({})
-    .sort({ day: -1 })
+    .sort({ day: -1 }) 
     .then(dbWorkout => {
       res.json(dbWorkout);
     })
@@ -40,7 +40,7 @@ router.put("/api/workouts/:id", (req, res) => {
           _id: req.params.id
         },
         {
-          $set: {
+          $push: {
             exercises: req.body
           }
         },
